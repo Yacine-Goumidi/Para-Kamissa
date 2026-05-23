@@ -21,9 +21,9 @@
       --bored:     #9B8BB4;
       --bored-dark:#6E5A8E;
       --bored-bg:  #F3EFF8;
-      --lazy:      #6DBF82;
-      --lazy-dark: #3D9955;
-      --lazy-bg:   #EBF7EE;
+      --dua:       #C4A35A;
+      --dua-dark:  #8B6914;
+      --dua-bg:    #FDF8EE;
     }
 
     body {
@@ -130,12 +130,15 @@
     .card[data-emotion="bored"]::before { background: radial-gradient(circle at 70% 20%, #9B8BB433, transparent 70%); }
     .card[data-emotion="lazy"]  { background: var(--lazy-bg);  border-color: var(--lazy);  box-shadow: 0 4px 24px #6DBF8222; }
     .card[data-emotion="lazy"]::before  { background: radial-gradient(circle at 70% 20%, #6DBF8233, transparent 70%); }
+    .card[data-emotion="dua"]   { background: var(--dua-bg);   border-color: var(--dua);   box-shadow: 0 4px 24px #C4A35A22; }
+    .card[data-emotion="dua"]::before   { background: radial-gradient(circle at 70% 20%, #C4A35A33, transparent 70%); }
 
     .card:hover[data-emotion="joy"]   { box-shadow: 0 12px 40px #F9C84640; }
     .card:hover[data-emotion="sad"]   { box-shadow: 0 12px 40px #6BA3BE40; }
     .card:hover[data-emotion="anger"] { box-shadow: 0 12px 40px #E05C5C40; }
     .card:hover[data-emotion="bored"] { box-shadow: 0 12px 40px #9B8BB440; }
     .card:hover[data-emotion="lazy"]  { box-shadow: 0 12px 40px #6DBF8240; }
+    .card:hover[data-emotion="dua"]   { box-shadow: 0 12px 40px #C4A35A40; }
 
     .card-emoji {
       font-size: 3rem;
@@ -157,6 +160,7 @@
     .card[data-emotion="anger"] .card-title { color: var(--anger-dark); }
     .card[data-emotion="bored"] .card-title { color: var(--bored-dark); }
     .card[data-emotion="lazy"]  .card-title { color: var(--lazy-dark); }
+    .card[data-emotion="dua"]   .card-title { color: var(--dua-dark); }
 
     .card-sub {
       font-size: 0.88rem;
@@ -186,6 +190,7 @@
     .card[data-emotion="anger"] .card-btn { background: var(--anger); color: #fff; }
     .card[data-emotion="bored"] .card-btn { background: var(--bored); color: #fff; }
     .card[data-emotion="lazy"]  .card-btn { background: var(--lazy);  color: #fff; }
+    .card[data-emotion="dua"]   .card-btn { background: var(--dua);   color: #fff; }
 
     .card:hover .card-btn { transform: scale(1.05); }
 
@@ -293,6 +298,33 @@
     .modal[data-emotion="lazy"]  .modal-title { color: var(--lazy-dark); }
     .modal[data-emotion="lazy"]  .modal-close { background: var(--lazy); }
 
+    .modal[data-emotion="dua"]   { border-top: 6px solid var(--dua); }
+    .modal[data-emotion="dua"]   .modal-title { color: var(--dua-dark); }
+    .modal[data-emotion="dua"]   .modal-close { background: var(--dua); }
+
+    .dua-arabic {
+      font-size: 1.5rem;
+      line-height: 2.2;
+      direction: rtl;
+      font-family: 'Georgia', serif;
+      color: var(--dua-dark);
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+    .dua-translation {
+      font-size: 0.95rem;
+      color: #666;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+    .dua-source {
+      font-size: 0.78rem;
+      color: #bbb;
+      letter-spacing: 0.04em;
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -317,6 +349,7 @@
     .card:nth-child(3) { animation-delay: 0.25s; }
     .card:nth-child(4) { animation-delay: 0.35s; }
     .card:nth-child(5) { animation-delay: 0.45s; }
+    .card:nth-child(6) { animation-delay: 0.55s; }
 
     /* ── PARTICLES (subtle) ── */
     .particles {
@@ -386,6 +419,13 @@
     <button class="card-btn">Ouvrir 🍃</button>
   </div>
 
+  <div class="card" data-emotion="dua" onclick="openModal('dua')">
+    <span class="card-emoji">🤲🏾</span>
+    <div class="card-title">Une dua pour moi</div>
+
+    <button class="card-btn">Ouvrir ✨</button>
+  </div>
+
 </main>
 
 <!-- MODAL -->
@@ -426,7 +466,7 @@
         "Cette légèreté que tu ressens ? Garde-la. Elle te va si bien.",
         "Tu es faite pour être heureuse, Kamissa. Ça se voit. 💛",
         "Laisse-toi porter par cette joie sans te poser de questions. Tu le mérites.",
-        "Ton bonheur me rend heureux. Continue de briller comme ça. 🌟"
+        "Ton bonheur me rend heureux·se. Continue de briller comme ça. 🌟"
       ]
     },
     sad: {
@@ -434,7 +474,7 @@
       title: 'La tristesse',
       messages: [
         "C'est ok d'être triste. Tu n'as pas à faire semblant. 💙",
-        "Cette tristesse va passer, appelle .",
+        "Cette tristesse va passer, Kamissa. Chaque vague finit par se retirer.",
         "Tu as le droit de pleurer. Ça n'enlève rien à ta force.",
         "Je suis là pour toi, même de loin. Tu n'es jamais vraiment seule. 🤍",
         "La tristesse aussi, ça fait partie de la vie. Et tu es capable de la traverser.",
@@ -532,6 +572,34 @@
         "Tu mérites cette douceur-là, Kamissa. Sans avoir rien à prouver.",
         "Je t'aime aussi dans tes jours mollets. Tu n'as pas à être parfaite. 💚"
       ]
+    },
+    dua: {
+      emoji: '🤲🏾',
+      title: 'Une dua pour toi',
+      duas: [
+        { arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", translation: "Seigneur, accorde-nous le bien ici-bas et le bien dans l'au-delà, et préserve-nous du châtiment du feu.", source: "Sourate Al-Baqara 2:201" },
+        { arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", translation: "Ô Allah, Tu es le Pardonneur, Tu aimes pardonner, alors pardonne-moi.", source: "Rapporté par At-Tirmidhi" },
+        { arabic: "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ", translation: "Allah me suffit, il n'y a de dieu que Lui. C'est en Lui que je place ma confiance. Il est le Seigneur du Trône immense.", source: "Sourate At-Tawba 9:129" },
+        { arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي", translation: "Seigneur, ouvre ma poitrine, facilite-moi ma tâche.", source: "Sourate Ta-Ha 20:25-26" },
+        { arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ", translation: "Ô Allah, je Te demande la santé et le bien-être ici-bas et dans l'au-delà.", source: "Rapporté par Abu Dawud" },
+        { arabic: "لَا إِلَهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", translation: "Il n'y a de dieu que Toi, gloire à Toi ! J'ai vraiment été du nombre des injustes.", source: "Sourate Al-Anbiya 21:87 — dua de Yunus (as)" },
+        { arabic: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ", translation: "Seigneur, j'ai besoin de tout bien que Tu feras descendre sur moi.", source: "Sourate Al-Qasas 28:24 — dua de Musa (as)" },
+        { arabic: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا وَأَنْتَ تَجْعَلُ الْحَزَنَ إِذَا شِئْتَ سَهْلًا", translation: "Ô Allah, rien n'est facile sauf ce que Tu rends facile, et Tu peux rendre la tristesse facile si Tu le veux.", source: "Rapporté par Ibn Hibban" },
+        { arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ", translation: "Ô Allah, je me réfugie en Toi contre l'anxiété et la tristesse.", source: "Rapporté par Al-Bukhari" },
+        { arabic: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً", translation: "Seigneur, ne laisse pas nos cœurs dévier après que Tu nous as guidés. Accorde-nous Ta miséricorde.", source: "Sourate Al-Imran 3:8" },
+        { arabic: "اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي وَأَصْلِحْ لِي دُنْيَايَ", translation: "Ô Allah, améliore pour moi ma religion qui protège mes affaires, et améliore ma vie en ce monde.", source: "Rapporté par Muslim" },
+        { arabic: "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", translation: "Ô Celui qui retourne les cœurs, affermis mon cœur sur Ta religion.", source: "Rapporté par At-Tirmidhi" },
+        { arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ حُبَّكَ وَحُبَّ مَنْ يُحِبُّكَ", translation: "Ô Allah, je Te demande Ton amour et l'amour de ceux qui T'aiment.", source: "Rapporté par At-Tirmidhi" },
+        { arabic: "رَبِّ أَعِنِّي وَلَا تُعِنْ عَلَيَّ وَانْصُرْنِي وَلَا تَنْصُرْ عَلَيَّ", translation: "Seigneur, aide-moi et ne permets pas qu'on m'aide contre moi. Soutiens-moi et ne permets pas qu'on me combatte.", source: "Rapporté par Abu Dawud" },
+        { arabic: "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَعَافِنِي وَارْزُقْنِي", translation: "Ô Allah, pardonne-moi, aie pitié de moi, guide-moi, préserve-moi et pourvois à mes besoins.", source: "Rapporté par Muslim" },
+        { arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ", translation: "Gloire à Allah et à Sa louange. Gloire à Allah, le Très Grand.", source: "Rapporté par Al-Bukhari et Muslim" },
+        { arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ", translation: "Ô Allah, je Te demande le Paradis et je me réfugie en Toi contre le Feu.", source: "Rapporté par Abu Dawud" },
+        { arabic: "رَبِّ زِدْنِي عِلْمًا", translation: "Seigneur, accroît mes connaissances.", source: "Sourate Ta-Ha 20:114" },
+        { arabic: "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنتَ فَاغْفِرْ لِي", translation: "Ô Allah, j'ai été injuste envers moi-même d'une grande injustice. Nul ne pardonne les péchés sauf Toi, alors pardonne-moi.", source: "Rapporté par Al-Bukhari" },
+        { arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ", translation: "Ô Allah, Tu es mon Seigneur, il n'y a de dieu que Toi. Tu m'as créé et je suis Ton serviteur.", source: "Rapporté par Al-Bukhari — Sayyid Al-Istighfar" },
+        { arabic: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", translation: "Au nom d'Allah, avec Son nom, rien ne peut causer de tort ni sur Terre ni dans le ciel. Il est l'Entendant, l'Omniscient.", source: "Rapporté par Abu Dawud et At-Tirmidhi" },
+        { arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا", translation: "Ô Allah, je Te demande une science utile, une subsistance bonne et une œuvre acceptée.", source: "Rapporté par Ibn Majah" }
+      ]
     }
   };
 
@@ -547,7 +615,16 @@
     modal.setAttribute('data-emotion', emotion);
     document.getElementById('modal-emoji').textContent = data.emoji;
     document.getElementById('modal-title').textContent = data.title;
-    document.getElementById('modal-message').textContent = rand(data.messages);
+
+    if (emotion === 'dua') {
+      const dua = data.duas[Math.floor(Math.random() * data.duas.length)];
+      document.getElementById('modal-message').innerHTML =
+        `<div class="dua-arabic">${dua.arabic}</div>` +
+        `<div class="dua-translation">${dua.translation}</div>` +
+        `<div class="dua-source">${dua.source}</div>`;
+    } else {
+      document.getElementById('modal-message').textContent = rand(data.messages);
+    }
 
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -570,7 +647,7 @@
   });
 
   // subtle floating particles
-  const colours = ['#F9C846','#6BA3BE','#E05C5C','#9B8BB4','#6DBF82'];
+  const colours = ['#F9C846','#6BA3BE','#E05C5C','#9B8BB4','#6DBF82','#C4A35A'];
   const container = document.getElementById('particles');
   for (let i = 0; i < 18; i++) {
     const p = document.createElement('div');
