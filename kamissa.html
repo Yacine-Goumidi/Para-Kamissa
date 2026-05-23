@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pour Kamissa 💛</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --joy:       #F9C846;
+      --joy-dark:  #E0A800;
+      --joy-bg:    #FFFBEC;
+      --sad:       #6BA3BE;
+      --sad-dark:  #3E7A9E;
+      --sad-bg:    #EBF4FA;
+      --anger:     #E05C5C;
+      --anger-dark:#B83535;
+      --anger-bg:  #FDF0F0;
+      --bored:     #9B8BB4;
+      --bored-dark:#6E5A8E;
+      --bored-bg:  #F3EFF8;
+      --lazy:      #6DBF82;
+      --lazy-dark: #3D9955;
+      --lazy-bg:   #EBF7EE;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #FAFAF7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #FFF3C4 0%, transparent 70%);
+      pointer-events: none;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: #2A2A2A;
+      line-height: 1.1;
+    }
+    header h1 em {
+      font-style: italic;
+      color: var(--joy-dark);
+    }
+    header p {
+      margin-top: 14px;
+      font-size: 1.05rem;
+      color: #777;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-size: 1.2rem;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 28px 60px;
+    }
+
+    /* ── EMOTION CARD ── */
+    .card {
+      border-radius: 28px;
+      padding: 36px 30px 32px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
+      border: 2px solid transparent;
+      background: #fff;
+      user-select: none;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: inherit;
+    }
+    .card:hover { transform: translateY(-6px) scale(1.02); }
+    .card:hover::before { opacity: 1; }
+    .card:active { transform: scale(0.97); }
+
+    /* per-emotion colours */
+    .card[data-emotion="joy"]   { background: var(--joy-bg);   border-color: var(--joy);   box-shadow: 0 4px 24px #F9C84622; }
+    .card[data-emotion="joy"]::before   { background: radial-gradient(circle at 70% 20%, #F9C84633, transparent 70%); }
+    .card[data-emotion="sad"]   { background: var(--sad-bg);   border-color: var(--sad);   box-shadow: 0 4px 24px #6BA3BE22; }
+    .card[data-emotion="sad"]::before   { background: radial-gradient(circle at 70% 20%, #6BA3BE33, transparent 70%); }
+    .card[data-emotion="anger"] { background: var(--anger-bg); border-color: var(--anger); box-shadow: 0 4px 24px #E05C5C22; }
+    .card[data-emotion="anger"]::before { background: radial-gradient(circle at 70% 20%, #E05C5C33, transparent 70%); }
+    .card[data-emotion="bored"] { background: var(--bored-bg); border-color: var(--bored); box-shadow: 0 4px 24px #9B8BB422; }
+    .card[data-emotion="bored"]::before { background: radial-gradient(circle at 70% 20%, #9B8BB433, transparent 70%); }
+    .card[data-emotion="lazy"]  { background: var(--lazy-bg);  border-color: var(--lazy);  box-shadow: 0 4px 24px #6DBF8222; }
+    .card[data-emotion="lazy"]::before  { background: radial-gradient(circle at 70% 20%, #6DBF8233, transparent 70%); }
+
+    .card:hover[data-emotion="joy"]   { box-shadow: 0 12px 40px #F9C84640; }
+    .card:hover[data-emotion="sad"]   { box-shadow: 0 12px 40px #6BA3BE40; }
+    .card:hover[data-emotion="anger"] { box-shadow: 0 12px 40px #E05C5C40; }
+    .card:hover[data-emotion="bored"] { box-shadow: 0 12px 40px #9B8BB440; }
+    .card:hover[data-emotion="lazy"]  { box-shadow: 0 12px 40px #6DBF8240; }
+
+    .card-emoji {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.12));
+      transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .card:hover .card-emoji { transform: scale(1.18) rotate(-5deg); }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card[data-emotion="joy"]   .card-title { color: var(--joy-dark); }
+    .card[data-emotion="sad"]   .card-title { color: var(--sad-dark); }
+    .card[data-emotion="anger"] .card-title { color: var(--anger-dark); }
+    .card[data-emotion="bored"] .card-title { color: var(--bored-dark); }
+    .card[data-emotion="lazy"]  .card-title { color: var(--lazy-dark); }
+
+    .card-sub {
+      font-size: 0.88rem;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 20px;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      pointer-events: none; /* card itself is clickable */
+    }
+    .card[data-emotion="joy"]   .card-btn { background: var(--joy);   color: #5a4000; }
+    .card[data-emotion="sad"]   .card-btn { background: var(--sad);   color: #fff; }
+    .card[data-emotion="anger"] .card-btn { background: var(--anger); color: #fff; }
+    .card[data-emotion="bored"] .card-btn { background: var(--bored); color: #fff; }
+    .card[data-emotion="lazy"]  .card-btn { background: var(--lazy);  color: #fff; }
+
+    .card:hover .card-btn { transform: scale(1.05); }
+
+    /* ── MODAL OVERLAY ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+      backdrop-filter: blur(0px);
+    }
+    .overlay.open {
+      opacity: 1;
+      pointer-events: all;
+      backdrop-filter: blur(6px);
+    }
+    .overlay-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 20, 20, 0.45);
+    }
+
+    /* ── MODAL BOX ── */
+    .modal {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      width: 100%;
+      border-radius: 32px;
+      padding: 48px 42px 40px;
+      background: #fff;
+      text-align: center;
+      transform: translateY(40px) scale(0.95);
+      transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 30px 80px rgba(0,0,0,.18);
+    }
+    .overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-emoji {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 16px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .modal-message {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #444;
+      font-weight: 300;
+      white-space: pre-line;
+    }
+
+    .modal-close {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 12px 34px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #fff;
+    }
+    .modal-close:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+
+    /* ── per-emotion modal colours ── */
+    .modal[data-emotion="joy"]   { border-top: 6px solid var(--joy); }
+    .modal[data-emotion="joy"]   .modal-title { color: var(--joy-dark); }
+    .modal[data-emotion="joy"]   .modal-close { background: var(--joy); color: #5a4000; }
+
+    .modal[data-emotion="sad"]   { border-top: 6px solid var(--sad); }
+    .modal[data-emotion="sad"]   .modal-title { color: var(--sad-dark); }
+    .modal[data-emotion="sad"]   .modal-close { background: var(--sad); }
+
+    .modal[data-emotion="anger"] { border-top: 6px solid var(--anger); }
+    .modal[data-emotion="anger"] .modal-title { color: var(--anger-dark); }
+    .modal[data-emotion="anger"] .modal-close { background: var(--anger); }
+
+    .modal[data-emotion="bored"] { border-top: 6px solid var(--bored); }
+    .modal[data-emotion="bored"] .modal-title { color: var(--bored-dark); }
+    .modal[data-emotion="bored"] .modal-close { background: var(--bored); }
+
+    .modal[data-emotion="lazy"]  { border-top: 6px solid var(--lazy); }
+    .modal[data-emotion="lazy"]  .modal-title { color: var(--lazy-dark); }
+    .modal[data-emotion="lazy"]  .modal-close { background: var(--lazy); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #bbb;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    footer span { color: #E05C5C; }
+
+    /* ── ENTRANCE ANIMATIONS ── */
+    .card {
+      opacity: 0;
+      animation: rise 0.6s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.25s; }
+    .card:nth-child(4) { animation-delay: 0.35s; }
+    .card:nth-child(5) { animation-delay: 0.45s; }
+
+    /* ── PARTICLES (subtle) ── */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+      animation: drift linear infinite;
+    }
+    @keyframes drift {
+      from { transform: translateY(100vh) rotate(0deg); }
+      to   { transform: translateY(-120px) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<header>
+  <h1>Bonjour <em>Kamissa</em> 🌸</h1>
+  <p>Comment tu te sens en ce moment ?</p>
+  <div class="stars">✦ ✦ ✦</div>
+</header>
+
+<main class="grid">
+
+  <div class="card" data-emotion="joy" onclick="openModal('joy')">
+    <span class="card-emoji">🌟</span>
+    <div class="card-title">Je suis heureuse</div>
+
+    <button class="card-btn">Ouvrir ✨</button>
+  </div>
+
+  <div class="card" data-emotion="sad" onclick="openModal('sad')">
+    <span class="card-emoji">🌧️</span>
+    <div class="card-title">Je suis triste</div>
+
+    <button class="card-btn">Ouvrir 💙</button>
+  </div>
+
+  <div class="card" data-emotion="anger" onclick="openModal('anger')">
+    <span class="card-emoji">🔥</span>
+    <div class="card-title">Je suis en colère</div>
+
+    <button class="card-btn">Ouvrir 🌋</button>
+  </div>
+
+  <div class="card" data-emotion="bored" onclick="openModal('bored')">
+    <span class="card-emoji">🌀</span>
+    <div class="card-title">Je m'ennuie</div>
+
+    <button class="card-btn">Ouvrir 💜</button>
+  </div>
+
+  <div class="card" data-emotion="lazy" onclick="openModal('lazy')">
+    <span class="card-emoji">🌿</span>
+    <div class="card-title">Je suis paresseuse</div>
+
+    <button class="card-btn">Ouvrir 🍃</button>
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
+  <div class="overlay-bg"></div>
+  <div class="modal" id="modal">
+    <span class="modal-emoji" id="modal-emoji"></span>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-message" id="modal-message"></div>
+    <button class="modal-close" onclick="closeModal()">Fermer ✕</button>
+  </div>
+</div>
+
+<footer>fait avec <span>♥</span> rien que pour toi</footer>
+
+<script>
+  const emotions = {
+    joy: {
+      emoji: '🌟',
+      title: 'La joie',
+      messages: [
+        "Cette joie que tu ressens, elle est réelle et elle est méritée. Garde-la précieusement. 💛",
+        "Tu rayonnes, Kamissa. Laisse cette lumière déborder partout où tu passes.",
+        "La joie que tu portes en toi aujourd'hui, personne ne peut te l'enlever. Elle t'appartient.",
+        "Tu mérites d'être heureuse. Complètement, totalement, sans retenue. 🌟",
+        "Ton sourire en ce moment est la plus belle chose. Continue de le laisser briller.",
+        "Ces moments de bonheur sont faits pour toi. Tu les mérites plus que tu ne le crois.",
+        "La joie que tu ressens aujourd'hui, c'est la vie qui te dit que tu es exactement où tu dois être.",
+        "Savoure chaque seconde de ce bonheur. Il est à toi, rien qu'à toi. ✨",
+        "Tu illumines tout autour de toi quand tu es heureuse comme ça. C'est magnifique.",
+        "Cette joie en toi, c'est ta vraie nature. Elle revient toujours. Rappelle-toi en. 🌸",
+        "Kamissa heureuse, c'est le plus beau des spectacles. Continue. 💫",
+        "Ton bonheur est contagieux et précieux. Ne le minimise jamais.",
+        "Tu as le droit d'être heureuse sans raison, juste parce que tu existes. 🌟",
+        "Ce que tu ressens là, c'est réel. Et tu le mérites entièrement.",
+        "Profite de chaque instant de cette joie. Elle est belle comme toi.",
+        "La vie est belle parfois, et toi tu la rends encore plus belle. ✨",
+        "Cette légèreté que tu ressens ? Garde-la. Elle te va si bien.",
+        "Tu es faite pour être heureuse, Kamissa. Ça se voit. 💛",
+        "Laisse-toi porter par cette joie sans te poser de questions. Tu le mérites.",
+        "Ton bonheur me rend heureux·se. Continue de briller comme ça. 🌟"
+      ]
+    },
+    sad: {
+      emoji: '🌧️',
+      title: 'La tristesse',
+      messages: [
+        "C'est ok d'être triste. Tu n'as pas à faire semblant. 💙",
+        "Cette tristesse va passer, Kamissa. Chaque vague finit par se retirer.",
+        "Tu as le droit de pleurer. Ça n'enlève rien à ta force.",
+        "Je suis là pour toi, même de loin. Tu n'es jamais vraiment seule. 🤍",
+        "La tristesse aussi, ça fait partie de la vie. Et tu es capable de la traverser.",
+        "Prends soin de toi en ce moment. Tu le mérites même dans les moments difficiles.",
+        "Ce que tu ressens est valide. Ne minimise jamais ta douleur. 💙",
+        "Après la pluie, il y a toujours quelque chose de plus propre et de plus léger.",
+        "Tu es plus forte que cette tristesse, même si ça ne se sent pas là maintenant.",
+        "Autorise-toi à ressentir ça pleinement. Ça aide mieux que de faire semblant. 🌧️",
+        "Je pense à toi plus fort quand tu as de la peine. Tu n'es pas seule.",
+        "La tristesse ne dit pas la vérité sur qui tu es. Tu es lumière, même dans le gris.",
+        "Chaque moment difficile que tu traverses te montre à quel point tu es courageuse. 💙",
+        "Rien de ce que tu ressens n'est excessif. Ton cœur est sincère, c'est tout.",
+        "Tu as survécu à tous tes mauvais jours jusqu'ici. Celui-là aussi passera.",
+        "Serre-toi fort, Kamissa. Tu mérites tout l'amour du monde, surtout là. 🤍",
+        "La tristesse, ça ne dure pas toujours. Mais ton courage, lui, reste.",
+        "Je voudrais être là pour essuyer tes larmes. Sache que je pense à toi. 💙",
+        "Tu as le droit d'aller moins bien. Ça ne change pas tout ce que tu vaux.",
+        "Même dans la tristesse tu restes belle, forte et aimée. N'oublie pas ça. 🌸"
+      ]
+    },
+    anger: {
+      emoji: '🔥',
+      title: 'La colère',
+      messages: [
+        "Ta colère est légitime. Tu as le droit de ressentir ça. 🔥",
+        "Prends une grande inspiration. Laisse l'air entrer lentement. Tu gères.",
+        "Ta colère dit quelque chose d'important. Écoute-la sans te laisser emporter.",
+        "Tu es forte, Kamissa. Même cette émotion-là, tu vas la traverser. 💪🏾",
+        "Ce que tu ressens est valide. Personne n'a le droit de te dire que tu exagères.",
+        "Laisse passer la vague. Elle est forte mais elle ne dure pas. 🔥",
+        "Tu as le droit d'être en colère. Et tu as aussi la sagesse pour gérer ça.",
+        "Respire. Tu es plus grande que ce qui t'a mise dans cet état.",
+        "Ton émotion est réelle et mérite d'être entendue. Même par toi-même. 🌋",
+        "Ne te juge pas pour cette colère. Elle fait partie de toi et tu la maîtrises.",
+        "Prends le temps qu'il faut. La colère passe quand on lui laisse de la place. 🔥",
+        "Tu as le droit d'être fâchée. Et tu as aussi le droit de trouver la paix ensuite.",
+        "Cette force que tu sens là, canalise-la. Elle peut devenir quelque chose de puissant.",
+        "Tu es humaine, Kamissa. La colère aussi, ça fait partie de l'être humain. 💪🏾",
+        "Même dans la tempête, tu resteras toi. Et toi, tu t'en sors toujours.",
+        "Ce moment passera. Et tu en ressortiras encore plus solide. 🔥",
+        "Ta colère te protège parfois. Fais-lui confiance, mais reste maître·sse d'elle.",
+        "Respire fort. Puis encore. Ça va aller, je te le promets. 💛",
+        "Tu traverses quelque chose de difficile là. Mais tu es taillée pour ça.",
+        "Je suis fier·e de toi même dans ces moments-là. Tu restes toi. 🔥"
+      ]
+    },
+    bored: {
+      emoji: '🌀',
+      title: "L'ennui",
+      messages: [
+        "L'ennui, c'est juste ton esprit qui attend quelque chose de beau. 💜",
+        "Ces moments calmes font partie de la vie. Ils ont leur utilité, même si c'est pas évident.",
+        "Tu n'as pas à être occupée tout le temps. Le vide aussi a de la valeur.",
+        "L'ennui passe. Toujours. Laisse-lui juste un peu de temps. 🌀",
+        "Même les journées sans saveur font partie du voyage. Ça va aller.",
+        "Tu n'es pas obligée d'être productive chaque minute. Laisse ton esprit souffler. 💜",
+        "Ces moments tranquilles, parfois c'est juste ton âme qui recharge. Laisse-la faire.",
+        "L'ennui te dit que tu es en vie et que tu attends quelque chose. C'est pas grave. 🌙",
+        "Kamissa, même tes journées plates ont de la valeur. Tu existes et c'est déjà beaucoup.",
+        "Ce silence que tu ressens là, laisse-le être. Il passera et quelque chose d'autre viendra. 💜",
+        "Tu n'as pas à remplir chaque instant. Être là, c'est déjà suffisant.",
+        "L'ennui aussi ça se traverse. Et toi, tu traverses tout. 🌀",
+        "Parfois le calme arrive avant quelque chose de bien. Reste là.",
+        "Tu mérites des journées douces et sans grand chose. C'est normal. 💜",
+        "Ça va aller, Kamissa. Même quand les journées semblent longues et vides.",
+        "L'ennui fait partie des émotions humaines. Tu n'as pas à t'en vouloir. 🌙",
+        "Prends ce moment pour toi, sans rien devoir à personne. C'est rare, profites-en.",
+        "Tu vas retrouver ton élan. Ça revient toujours. 💜",
+        "Ces journées lentes font partie de ton histoire aussi. Elles comptent.",
+        "Je pense à toi même dans ces petits moments de rien. Tu n'es pas oubliée. 🌀"
+      ]
+    },
+    lazy: {
+      emoji: '🌿',
+      title: 'La paresse',
+      messages: [
+        "Tu as le droit de ne rien faire. Vraiment, complètement. 🌿",
+        "Le repos n'est pas une faiblesse. Ton corps sait ce dont il a besoin.",
+        "Aujourd'hui, ne rien faire c'est peut-être exactement ce qu'il faut faire.",
+        "Tu n'as pas à mériter ton repos. Il t'appartient, point. 💚",
+        "Kamissa, tu peux souffler. Le monde ne s'arrêtera pas de tourner.",
+        "Se reposer, c'est aussi travailler pour soi. Laisse-toi faire. 🌿",
+        "Tu donnes tellement aux autres. Aujourd'hui, donne à toi. C'est ok.",
+        "La paresse d'aujourd'hui, c'est peut-être l'énergie de demain. Fais confiance. 💚",
+        "Tu n'es pas obligée d'être en mouvement tout le temps. Là tu peux juste être.",
+        "Ces moments de rien, ils te rechargent. Laisse-les faire leur travail. 🌿",
+        "Ne te juge pas. Tout le monde a besoin de ces jours-là. Toi aussi.",
+        "Ton corps et ton esprit méritent du repos. Tu le mérites. 💚",
+        "Ça va aller. Même si aujourd'hui tu fais juste exister. C'est assez.",
+        "Prendre soin de soi ça ressemble parfois à ne rien faire. C'est normal. 🌿",
+        "Tu te reposeras et tu te sentiras mieux. Donne-toi cette chance.",
+        "Sans culpabilité. Sans minuterie. Juste toi, au calme. 💚",
+        "Le monde peut attendre. Toi, tu passes en premier aujourd'hui.",
+        "Ces moments de paresse font aussi partie de qui tu es. Accepte-les. 🌿",
+        "Tu mérites cette douceur-là, Kamissa. Sans avoir rien à prouver.",
+        "Je t'aime aussi dans tes jours mollets. Tu n'as pas à être parfaite. 💚"
+      ]
+    }
+  };
+
+  function rand(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function openModal(emotion) {
+    const data = emotions[emotion];
+    const modal = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+
+    modal.setAttribute('data-emotion', emotion);
+    document.getElementById('modal-emoji').textContent = data.emoji;
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-message').textContent = rand(data.messages);
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('overlay') ||
+        e.target.classList.contains('overlay-bg')) {
+      closeModal();
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // subtle floating particles
+  const colours = ['#F9C846','#6BA3BE','#E05C5C','#9B8BB4','#6DBF82'];
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 14 + 6;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colours[i % colours.length]};
+      animation-duration:${Math.random()*18+12}s;
+      animation-delay:-${Math.random()*20}s;
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
